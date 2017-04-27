@@ -73,12 +73,8 @@ static int ad_dpot_i2c_remove(struct i2c_client *client)
 	return ad_dpot_remove(&client->dev);
 }
 
-static const struct i2c_device_id ad_dpot_id[] = {
-};
-MODULE_DEVICE_TABLE(i2c, ad_dpot_id);
-
 #ifdef CONFIG_OF
-static const struct of_device_id ad_dpot_of_match[] = {
+static const struct i2c_device_id ad_dpot_id[] = {
 	{ .compatible = "adi,ad5160", .data = (void *) AD5160_ID, },
 	{ .compatible = "adi,ad5161", .data = (void *) AD5161_ID, },
 	{ .compatible = "adi,ad5162", .data = (void *) AD5162_ID, },
@@ -109,8 +105,13 @@ static const struct of_device_id ad_dpot_of_match[] = {
 	{ .compatible = "adi,ad5271", .data = (void *) AD5271_ID, },	
 	{/* Sentinel */}
 };
-MODULE_DEVICE_TABLE(of, ad_dpot_of_match);
+MODULE_DEVICE_TABLE(i2c, ad_dpot_id);
 #endif
+
+static const struct of_device_id ad_dpot_of_match[] = {	
+};
+MODULE_DEVICE_TABLE(of, ad_dpot_of_match);
+
 
 static struct i2c_driver ad_dpot_i2c_driver = {
 	.driver = {
