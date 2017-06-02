@@ -9,7 +9,6 @@
 #include <linux/i2c.h>
 #include <linux/module.h>
 #include <linux/of.h>
-
 #include "ad525x_dpot.h"
 
 /* I2C bus functions */
@@ -89,6 +88,7 @@ static const struct i2c_device_id ad_dpot_id[] = {
 	{"ad5246", AD5246_ID},
 	{"ad5247", AD5247_ID},
 	{"ad5248", AD5248_ID},
+        {"ad5263", AD5263_ID},
 	{"ad5280", AD5280_ID},
 	{"ad5282", AD5282_ID},
 	{"adn2860", ADN2860_ID},
@@ -104,6 +104,7 @@ static const struct i2c_device_id ad_dpot_id[] = {
 };
 MODULE_DEVICE_TABLE(i2c, ad_dpot_id);
 
+ 
 #ifdef CONFIG_OF
 static const struct of_device_id ad_dpot_of_match[] = {
 	{ .compatible = "adi,ad5160", .data = (void *) AD5160_ID, },
@@ -133,7 +134,7 @@ static const struct of_device_id ad_dpot_of_match[] = {
 	{ .compatible = "adi,ad8403", .data = (void *) AD8403_ID, },
 	{ .compatible = "adi,adn2850", .data = (void *) ADN2850_ID, },
 	{ .compatible = "adi,ad5270", .data = (void *) AD5270_ID, },
-	{ .compatible = "adi,ad5271", .data = (void *) AD5271_ID, },	
+	{ .compatible = "adi,ad5272", .data = (void *) AD5272_ID, },	
 	{/* Sentinel */}
 };
 MODULE_DEVICE_TABLE(of, ad_dpot_of_match);
@@ -143,11 +144,11 @@ static struct i2c_driver ad_dpot_i2c_driver = {
 	.driver = {
 		.name	= "ad_dpot",
 		.owner	= THIS_MODULE,
-		.of_match_table	= of_match_ptr(ad_dpot_of_match),
 	},
 	.probe		= ad_dpot_i2c_probe,
 	.remove		= ad_dpot_i2c_remove,
 	.id_table	= ad_dpot_id,
+		.of_match_table	= of_match_ptr(ad_dpot_of_match),
 };
 
 module_i2c_driver(ad_dpot_i2c_driver);
