@@ -94,6 +94,7 @@ static const struct i2c_device_id ad_dpot_id[] = {
 	{"adn2860", ADN2860_ID},
 	{"ad5273", AD5273_ID},
 	{"ad5161", AD5161_ID},
+ 	{"ad5263", AD5263_ID},
 	{"ad5171", AD5171_ID},
 	{"ad5170", AD5170_ID},
 	{"ad5172", AD5172_ID},
@@ -134,7 +135,9 @@ static const struct of_device_id ad_dpot_of_match[] = {
 	{ .compatible = "adi,ad8403", .data = (void *) AD8403_ID, },
 	{ .compatible = "adi,adn2850", .data = (void *) ADN2850_ID, },
 	{ .compatible = "adi,ad5270", .data = (void *) AD5270_ID, },
-	{ .compatible = "adi,ad5272", .data = (void *) AD5272_ID, },	
+	{ .compatible = "adi,ad5272", .data = (void *) AD5272_ID, },
+	{ .compatible = "adi,ad5263", .data = (void *) AD5263_ID, },
+	{ .compatible = "adi,ad5254", .data = (void *) AD5254_ID, },	
 	{/* Sentinel */}
 };
 MODULE_DEVICE_TABLE(of, ad_dpot_of_match);
@@ -148,7 +151,7 @@ static struct i2c_driver ad_dpot_i2c_driver = {
 	.probe		= ad_dpot_i2c_probe,
 	.remove		= ad_dpot_i2c_remove,
 	.id_table	= ad_dpot_id,
-		.of_match_table	= of_match_ptr(ad_dpot_of_match),
+	.of_match_table	= of_match_ptr(ad_dpot_of_match),
 };
 
 module_i2c_driver(ad_dpot_i2c_driver);
